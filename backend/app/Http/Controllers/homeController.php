@@ -42,37 +42,59 @@ class homeController extends Controller
         return response()->json($category);
     }
 
+//
+    public function updateCategory(Request $req,$id){      
+        $category=Category::find($id);
+        $category->cname=$req->input('cname');
+        $category->sname=$req->input('sname');
+        $category->save();
+        }
+        
 
-    public function storebrand(Request $req){      
-        $data =array();
+        
+    public function deleteCategory($id){
+            $result= DB::table('categories')->where('id',$id)->delete();
+            if($result){
+                   return['result'=>"Category has been deleted"];
+            }
+        }
+
+
+public function storebrand(Request $req){      
+        $data=array();
         $data['name']=$req->name;
-        $data['logo']=$req->file('file')->store('Brand');
-        DB::table('brands')->insert($data);
-        return response([
-         'msg' => "Brand Successfully  Inserted"
-        ],200);
-
+        $image=$req->file('file');
+        if($image){
+         $image_name=hexdec(uniqid());
+         $ext=strtolower($image->getClientOriginalExtension());
+         $image_fullname=$image_name.'.'.$ext;
+         $path='Brand/';
+         $image_url=$path.$image_fullname;
+         $success=$image->move($path,$image_fullname);
+         $data['logo']= $image_url;
+         DB::table('brands')->insert($data);
+   }else{
+     DB::table('brands')->insert($data);
+     
     }
+}
 
-    public function showBrand(){
+public function showBrand(){
         $brand=DB::table('brands')->get();
         return response()->json($brand);
     }
 
 
-    public function deleteBrand($id){
-        $result= DB::table('brands')->where('id',$id)->delete();
-        if($result){
-               return['result'=>"Brand has been deleted"];
-        }
+public function deleteBrand($id){
+        $brand= DB::table('brands')->where('id',$id)->first();
+             $image=$brand->logo;
+             $delete= DB::table('brands')->where('id',$id)->delete();
+             if($delete){
+                 unlink($image);     
+             }     
     }
 
-    public function deleteCategory($id){
-        $result= DB::table('categories')->where('id',$id)->delete();
-        if($result){
-               return['result'=>"Category has been deleted"];
-        }
-    }
+    
 
     public function getBrand($id){    
        return Brand::find($id);
@@ -81,34 +103,51 @@ class homeController extends Controller
         return Category::find($id);
      }
 
-    public function updateBrand(Request $req,$id){      
-        $data =array();
-        $data['name']=$req->name;
-        $data['logo']=$req->file('file')->store('Brand');
-        DB::table('brands')->where('id',$id)->update($data);
-        return response([
-         'msg' => "Brand Successfully  Updated"
-        ],200);
+       
 
-    }
-    
+public function updateBrand(Request $req,$id){          
+   $brand=Brand::find($id);
+   $brand->name=$req->name;
+   $image=$req->file('file');
+   if($image){
+    $image_name=hexdec(uniqid());
+    $ext=strtolower($image->getClientOriginalExtension());
+    $image_fullname=$image_name.'.'.$ext;
+    $path='Brand/';
+    $image_url=$path.$image_fullname;
+    $success=$image->move($path,$image_fullname);
+    $brand->logo= $image_url;
+    $brand->save();    
+}else{
+    $brand->save();
+}
+}
+   
+        
+
 
     //product
-    public function Product(Request $req){      
+public function Product(Request $req){      
         $data =array();
         $data['product_name']=$req->name;
         $data['category_id']=$req->category;
         $data['brand_id']=$req->brand;
-        $data['image']=$req->file('file')->store('Brand');
-
-        DB::table('products')->insert($data);
-        return response([
-         'msg' => "Product Successfully  Inserted"
-        ],200);
-
+        $image=$req->file('file');
+        if($image){
+         $image_name=hexdec(uniqid());
+         $ext=strtolower($image->getClientOriginalExtension());
+         $image_fullname=$image_name.'.'.$ext;
+         $path='product/';
+         $image_url=$path.$image_fullname;
+         $success=$image->move($path,$image_fullname);
+         $data['image']= $image_url;
+         DB::table('products')->insert($data);
+   }else{
+     DB::table('products')->insert($data);     
+    }
     }
 
-    public function showProduct(){
+public function showProduct(){
         $brand=Product::
                 join('categories','products.category_id','categories.id')
                ->join('brands','products.brand_id','brands.id')
@@ -117,11 +156,14 @@ class homeController extends Controller
         return response()->json($brand);
     }
 
-    public function deleteProduct($id){
-        $result= Product::where('id',$id)->delete();
-        if($result){
-               return['result'=>"Brand has been deleted"];
-        }
+
+public function deleteProduct($id){
+        $pro= DB::table('products')->where('id',$id)->first();
+        $image=$pro->image;
+        $delete= DB::table('products')->where('id',$id)->delete();
+        if($delete){
+            unlink($image);     
+        }   
     }
 
 }

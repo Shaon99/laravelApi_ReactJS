@@ -26,6 +26,7 @@ Route::post('/insert',[homeController::class,'store']);
 Route::get('/showcategory',[homeController::class,'showCategory']);
 Route::delete('/deletecategory/{id}',[homeController::class,'deleteCategory']);
 Route::get('/category/{id}',[homeController::class,'getCategory']);
+Route::post('/updatecategory/{id}',[homeController::class,'updateCategory']);
 
 
 //brand

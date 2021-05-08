@@ -14,10 +14,6 @@ import Addp from "./addproduct";
 
 
 
-
-
-
-
 const Navber =()=>{
 return (
   <Router> 

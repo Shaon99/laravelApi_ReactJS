@@ -2,17 +2,25 @@ import React from 'react'
 import {useState} from 'react'
 import "./brand";
 import "./allbrand";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import {BrowserRouter as Router,Switch,Route,Link,NavLink,useHistory} from 'react-router-dom';
 
 
+toast.configure();
 function Brand() {
-  let history = useHistory();
+  const notify = () =>toast.success("Brand Added Successfully",{
+    autoClose:2000
+  })
+
+  // let history = useHistory();
 
 const[name,setName]=useState("");
 const[file,setFile]=useState("");
-async function add(){
+
+const submitData= e =>{
+  e.preventDefault();
   console.warn(name,file);
   var formData = new FormData();
   formData .append('name',name);
@@ -23,9 +31,8 @@ async function add(){
     method:'post',
     data:formData
   })
-    alert('Brand successfully Save!');
-    history.push('/brand')
-   // document.getElementById("bfrom").reset();
+  notify();
+   document.getElementById("bform").reset();
 }
     return (
       <div class="container">
@@ -33,6 +40,7 @@ async function add(){
       <div class="mt-5 col container d-flex justify-content-md-center">        
          <div className="card" style={{width: '40rem'}}>
        <div className="card-header text-success">Add Brand</div>
+       <form onSubmit={submitData} id="bform">
        <div className="card-body">
        <div class="form-group">
        <label for="exampleInputEmail1">Brand Name</label>
@@ -40,11 +48,11 @@ async function add(){
        </div>
        <div class="mt-3 form-group">
        <label for="exampleInputEmail1">Brand Logo</label>
-       <input required class="mt-2 form-control" onChange={(e)=>setFile(e.target.files[0])} type="file" name="file" placeholder="Select Logo"/>
+       <input  class="mt-2 form-control" onChange={(e)=>setFile(e.target.files[0])} type="file" name="file" placeholder="Select Logo"/>
        </div>      
-         <button onClick={add} className="btn btn-primary mt-3">Submit</button>
+         <button  className="btn btn-primary mt-3">Submit</button>      
        </div>
-
+       </form>
      </div>
      </div>
         </div>

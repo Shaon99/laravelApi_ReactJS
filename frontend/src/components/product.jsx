@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import "./product";
 import {BrowserRouter as Router,Switch,Route,Link,NavLink} from 'react-router-dom';
 import axios from "axios";
+import Swal from 'sweetalert2';
+
 class Product extends Component {
   state={
          products:[]
@@ -18,16 +20,53 @@ class Product extends Component {
   })
  }
 
- productDelete(id){
-    fetch("http://127.0.0.1:8000/api/deleteproduct/"+id,{
-      method:"DELETE"
-    });
-    alert("Product has been deleted");
-    axios.get('/productshow')
-    .then((response)=> {
-      this.setState({products:response.data})
-    })
+ productDelete=(id)=>{ 
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+      axios.delete("/deleteproduct/"+id)
+      .then((response)=> {
+        let product=this.state.products;
+        for(var i=0;i<product.length;i++){
+          if(product [i].id==id){
+            product.splice(i,1);
+            this.setState({products:product});
+          }
+        }
+      })
+
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your file is safe :)',
+        'error'
+      )
+    }
+  })
 }
+
 render(){
   return(
 <div class="container">

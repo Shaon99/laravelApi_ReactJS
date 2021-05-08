@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import "./allcategory";
 import {BrowserRouter as Router,Switch,Route,Link,NavLink} from 'react-router-dom';
 import axios from "axios";
+import Swal from 'sweetalert2';
+
 
 class AllC extends Component {
   state={
@@ -18,16 +20,53 @@ class AllC extends Component {
     console.log(error);
   })
  }
- drandDelete(id){
-  fetch("http://127.0.0.1:8000/api/deletecategory/"+id,{
-    method:"DELETE"
-  });
-  alert(" has been deleted");
-  axios.get('/showcategory')
-  .then((response)=> {
-    this.setState({categories:response.data})
+ categoryDelete=(id)=>{ 
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+      axios.delete("/deletecategory/"+id)
+      .then((response)=> {
+        let category=this.state.categories;
+        for(var i=0;i<category.length;i++){
+          if(category [i].id==id){
+            category.splice(i,1);
+            this.setState({categories:category});
+          }
+        }
+      })
+
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your file is safe :)',
+        'error'
+      )
+    }
   })
 }
+
 
 render(){
 
@@ -54,7 +93,7 @@ render(){
       <td>{category.sname}</td>
       <td>
        <Link to={"updatecategory/"+category.id}  class="btn btn-sm btn-success">Edit</Link>
-       <button style={{margin:5}} class="btn btn-sm btn-danger" onClick={()=>{this.drandDelete(category.id)}}>Delete</button>
+       <button style={{margin:5}} class="btn btn-sm btn-danger" onClick={()=>{this.categoryDelete(category.id)}}>Delete</button>
       </td>
      </tr>
      )

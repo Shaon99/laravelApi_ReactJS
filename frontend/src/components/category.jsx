@@ -4,44 +4,34 @@ import  "./category";
 import Allc from "./allcategory";
 import axios from 'axios';
 import {BrowserRouter as Router,Switch,Route,Link,NavLink} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
+toast.configure();
 class Category extends Component {
+  notify = () =>toast.success("Category Added Successfully",{
+    autoClose:2000
+  })
   state={
     cname:"",
-    sname:"",
-    msg:"",
+    sname:"",   
   }
+
+
   fromsubmit = (e) =>{
-    e.preventDefault();
+    e.preventDefault();    
     const data={
       cname:this.state.cname,
       sname:this.state.sname,
     }
-    axios.post('/insert',data)
-    .then( (response)=> {
-      this.setState({msg:response.data.msg})
-      document.getElementById("cfrom").reset();
+    axios.post('/insert',data)   
+   this.notify()
+      document.getElementById("cform").reset();  
+      }
 
-    })
-    .catch( (error)=> {
-     this.setState({msg:error.response.data.msg})
-    });
-
-  }
 
   render(){
-    let msg="";
-    if(this.state.msg){
-msg=(
-<div>
-<div class="alert alert-success">
-  {this.state.msg}
-</div>
-</div>
 
-)
-    }
     return (
 
 <div class="container">
@@ -50,16 +40,15 @@ msg=(
          <div className="card" style={{width: '40rem'}}>
         <div className="card-header text-success">Add Category</div>
         <div className="card-body">
-          {msg}
-          <form onSubmit={this.fromsubmit} id="cfrom">
+          <form onSubmit={this.fromsubmit} id="cform">
         <div class="form-group">
         <label for="exampleInputEmail1">Category Name</label>
-        <input  class="mt-2 form-control" type="text" name="cname" required
+        <input required class="mt-2 form-control" type="text" name="cname"
         placeholder="category name"  onChange={(e)=>{this.setState({cname:e.target.value})}}/>
         </div>
         <div class="mt-3 form-group">
         <label for="exampleInputEmail1">Slug Name</label>
-        <input  class="mt-2 form-control" type="text" name="sname" required  placeholder="slug name" 
+        <input required class="mt-2 form-control" type="text" name="sname"  placeholder="slug name" 
          onChange={(e)=>{this.setState({sname:e.target.value})}}/>
         </div>
           <button type="submit"  className="btn btn-primary mt-3">Submit</button>
@@ -68,8 +57,6 @@ msg=(
       </div>             
          </div>
          </div>
-
-
     );
   }
 }

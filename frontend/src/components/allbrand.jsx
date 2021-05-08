@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import "./allcategory";
 import {BrowserRouter as Router,Switch,Route,Link,NavLink} from 'react-router-dom';
 import axios from "axios";
+import Swal from 'sweetalert2';
+
 class Allb extends Component {
   state={
          brands:[]
@@ -18,16 +20,54 @@ class Allb extends Component {
   })
  }
 
- brandDelete(id){
-    fetch("http://127.0.0.1:8000/api/deletebrand/"+id,{
-      method:"DELETE"
-    });
-    alert("Brand has been deleted");
-    axios.get('/showbrand')
-    .then((response)=> {
-      this.setState({brands:response.data})
-    })
+ brandDelete=(id)=>{ 
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+      axios.delete("/deletebrand/"+id)
+      .then((response)=> {
+        let brand=this.state.brands;
+        for(var i=0;i<brand.length;i++){
+          if(brand [i].id==id){
+            brand.splice(i,1);
+            this.setState({brands:brand});
+          }
+        }
+      })
+
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your file is safe :)',
+        'error'
+      )
+    }
+  })
 }
+
+
 render(){
   return(
 <div class="container">
