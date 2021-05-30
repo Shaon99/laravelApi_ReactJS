@@ -72,7 +72,7 @@ render(){
 
   return(
 <div class="container">
-<button class="btn btn-success mt-2"><Link class="text-decoration-none text-light" to="/addcategory">Add Category</Link></button>
+<button class="btn btn-gradient-success mt-2"><Link class="text-decoration-none text-light" to="/addcategory">Add Category</Link></button>
 
 <table class="table mt-5">
   <thead>

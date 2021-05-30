@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\controllers\homeController;
+use App\Http\controllers\authController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,12 +16,15 @@ use App\Http\controllers\homeController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Login route
+Route::post('/login',[authController::class,'login']);
+Route::post('/register',[authController::class,'register']);
+
+
+
+
 
 Route::get('/home',[homeController::class,'index']);
-Route::post('/login',[homeController::class,'login']);
 
 //category
 Route::post('/insert',[homeController::class,'store']);

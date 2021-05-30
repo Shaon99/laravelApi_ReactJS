@@ -9,6 +9,7 @@ import {BrowserRouter as Router,Switch,Route,Link,NavLink,useHistory} from 'reac
 
 
 toast.configure();
+
 function Brand() {
   const notify = () =>toast.success("Brand Added Successfully",{
     autoClose:2000

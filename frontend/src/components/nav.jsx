@@ -11,6 +11,8 @@ import Allc from "./allcategory";
 import Editb from "./editbrand";
 import Editc from "./editcategory";
 import Addp from "./addproduct";
+import Login from "./login";
+
 
 
 
@@ -18,14 +20,16 @@ const Navber =()=>{
 return (
   <Router> 
 <bootstarp.Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <bootstarp.Navbar.Brand><NavLink exact activeStyle={{color:'white'}}  to="/">Home</NavLink></bootstarp.Navbar.Brand>
   <bootstarp.Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <bootstarp.Navbar.Collapse id="responsive-navbar-nav">
     <bootstarp.Nav className="mr-auto">
-      <bootstarp.Nav.Link ><NavLink activeStyle={{color:'white'}} to="/about">About</NavLink></bootstarp.Nav.Link>
-      <bootstarp.Nav.Link><NavLink activeStyle={{color:'white'}}  to="/brand">Brand</NavLink></bootstarp.Nav.Link>
-      <bootstarp.Nav.Link><NavLink activeStyle={{color:'white'}}  to="/category">Category</NavLink></bootstarp.Nav.Link>
-      <bootstarp.Nav.Link><NavLink activeStyle={{color:'white'}}  to="/product">Product</NavLink></bootstarp.Nav.Link>
+    <bootstarp.Nav.Link  ><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}} to="/home">Home</NavLink></bootstarp.Nav.Link>
+      <bootstarp.Nav.Link ><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}} to="/about">About</NavLink></bootstarp.Nav.Link>
+      <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/brand">Brand</NavLink></bootstarp.Nav.Link>
+      <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/category">Category</NavLink></bootstarp.Nav.Link>
+      <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/product">Product</NavLink></bootstarp.Nav.Link>
+      <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} exact activeStyle={{color:'white'}}  to="/">Login</NavLink></bootstarp.Nav.Link>
+
     </bootstarp.Nav>
   </bootstarp.Navbar.Collapse>
 </bootstarp.Navbar>
@@ -58,9 +62,13 @@ return (
 <Route path="/about">
 <Index />
 </Route>
-<Route path="/">
+<Route  path="/home">
 <App />
 </Route>
+<Route  path="/">
+<Login />
+</Route>
+
 </Switch>
 </Router>
 );
