@@ -72,7 +72,7 @@ render(){
 
   return(
 <div class="container">
-<button class="btn btn-gradient-success mt-2"><Link class="text-decoration-none text-light" to="/addcategory">Add Category</Link></button>
+<button class="btn btn-gradient-primary mt-2"><Link class="text-decoration-none text-light" to="/addcategory">Add Category</Link></button>
 
 <table class="table mt-5">
   <thead>
@@ -92,8 +92,8 @@ render(){
       <td>{category.cname}</td>
       <td>{category.sname}</td>
       <td>
-       <Link to={"updatecategory/"+category.id}  class="btn btn-sm btn-success">Edit</Link>
-       <button style={{margin:5}} class="btn btn-sm btn-danger" onClick={()=>{this.categoryDelete(category.id)}}>Delete</button>
+       <Link to={"updatecategory/"+category.id}  class="btn-sm btn btn-gradient-info">Edit</Link>
+       <button style={{margin:5}} class="btn btn-gradient-danger btn-sm " onClick={()=>{this.categoryDelete(category.id)}}>Delete</button>
       </td>
      </tr>
      )

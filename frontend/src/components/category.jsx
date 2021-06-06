@@ -35,7 +35,7 @@ class Category extends Component {
     return (
 
 <div class="container">
-<button class="btn btn-success mt-2"><Link class="text-decoration-none text-light" to="/category">All Category</Link></button>
+<button class="btn btn-gradient-primary mt-2"><Link class="text-decoration-none text-light" to="/category">All Category</Link></button>
         <div class="mt-5 col d-flex justify-content-md-center">      
          <div className="card" style={{width: '40rem'}}>
         <div className="card-header text-success">Add Category</div>
@@ -51,7 +51,7 @@ class Category extends Component {
         <input required class="mt-2 form-control" type="text" name="sname"  placeholder="slug name" 
          onChange={(e)=>{this.setState({sname:e.target.value})}}/>
         </div>
-          <button type="submit"  className="btn btn-primary mt-3">Submit</button>
+          <button type="submit"  className="btn btn-gradient-success mt-3">Submit</button>
           </form>
         </div>
       </div>             

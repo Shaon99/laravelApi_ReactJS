@@ -58,7 +58,7 @@ function Editb(props) {
       <br/>
       <img  name="img" class="mt-2" style={{width:60}} src={"http://127.0.0.1:8000/"+data.logo}/> 
       </div> 
-        <button onClick={()=>update(data.id)} className="btn btn-primary  mt-3">Update</button>
+        <button onClick={()=>update(data.id)} className="btn btn-gradient-success  mt-3">Update</button>
       </div>
       </div>
     </div>

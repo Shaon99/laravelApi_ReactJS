@@ -17,7 +17,7 @@ class authController extends Controller
                     'message'=>"login success",
                     'token'=>$token,
                     'user'=>$user,
-                ],400);
+                ],200);
             }
         }catch(Exception $e){
             return response([
@@ -44,7 +44,7 @@ class authController extends Controller
                 'message'=>"Register success",
                 'token'=>$token,
                 'user'=>$user,
-            ],400);
+            ],200);
         }
         catch(Exception $exception){
             return response([

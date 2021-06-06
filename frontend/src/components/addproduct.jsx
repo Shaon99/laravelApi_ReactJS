@@ -37,7 +37,7 @@ const add= e =>{
 
     return (
       <div class="container">
-<button class="btn btn-success mt-2"><Link class="text-decoration-none text-light" to="/product">All Product</Link></button>
+<button class="btn btn-gradient-primary mt-2"><Link class="text-decoration-none text-light" to="/product">All Product</Link></button>
       <div class="mt-5 col container d-flex justify-content-md-center">        
          <div className="card" style={{width: '40rem'}}>
          <form onSubmit={add} id="pform">
@@ -67,7 +67,7 @@ const add= e =>{
        <label for="exampleInputEmail1">Product Picture</label>
        <input required class="mt-2 form-control" onChange={(e)=>setFile(e.target.files[0])} type="file" name="file" placeholder="Select Logo"/>
        </div>   
-         <button class="btn btn-gradient-primary mt-3">Submit</button>
+         <button class="btn btn-gradient-success mt-3">Submit</button>
        </div>
 </form>
 

@@ -71,7 +71,7 @@ class Allb extends Component {
 render(){
   return(
 <div class="container">
-<button class="btn btn-gradient-success mt-2"><Link class="text-decoration-none text-light" to="/addbrand">Add Brand</Link></button>
+<button class="btn btn-gradient-primary mt-2"><Link class="text-decoration-none text-light" to="/addbrand">Add Brand</Link></button>
 <table class="table mt-5">
   <thead>
     <tr>
@@ -88,8 +88,8 @@ render(){
       <td>{brand.name}</td>
       <td><img style={{width:'80px',height:'80px'}}  class="rounded" src={"http://localhost:8000/"+brand.logo}/></td>
       <td>
-       <Link to={"update/"+brand.id} class="btn btn-sm btn-success">Edit</Link>
-        <button style={{margin:5}} class="btn btn-sm btn-danger" onClick={()=>{this.brandDelete(brand.id)}}>Delete</button>
+       <Link to={"update/"+brand.id} class="btn-sm btn btn-gradient-info">Edit</Link>
+        <button style={{margin:5}} class="btn-sm btn btn-gradient-danger" onClick={()=>{this.brandDelete(brand.id)}}>Delete</button>
       </td>
      </tr>
      )

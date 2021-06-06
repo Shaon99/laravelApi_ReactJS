@@ -53,7 +53,7 @@ function Editc(props) {
       <label for="exampleInputEmail1">Slug Name</label>
       <input required onChange={(e)=>setsName(e.target.value)} class="mt-2 form-control" type="text" name="sname" defaultValue={data.sname}/>   
       </div> 
-      <button onClick={()=>update(data.id)} className="btn btn-primary  mt-3">Update</button>
+      <button onClick={()=>update(data.id)} className="btn btn-gradient-success  mt-3">Update</button>
       </div>
       </div>
     </div>

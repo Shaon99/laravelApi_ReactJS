@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router,Switch,Route,Link,NavLink,Redirect} from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export class login extends Component {
+notify = () =>toast.error("Invalid email or password!! please try again",{
+    position:"top-center",
+    autoClose:3000
+  })
   state={
     email:"",
     password:"",
@@ -24,15 +30,14 @@ export class login extends Component {
     })
     
     .catch((error)=>{
-      console.log(error);
+     this.notify();
     });
   }
 
     render() {
       if(this.state.loggedIn){
-      return <Redirect to='/home'/>
-    }        
-      
+      return <Redirect to='/product'/>
+    }      
         return (
             <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">

@@ -70,7 +70,7 @@ class Product extends Component {
 render(){
   return(
 <div class="container">
-<button class="btn btn-gradient-success mt-2"><Link class="text-decoration-none text-light" to="/addproduct">Add Product</Link></button>
+<button class="btn btn-gradient-primary mt-2"><Link class="text-decoration-none text-light" to="/addproduct">Add Product</Link></button>
 
 <table class="table mt-5">
   <thead>
@@ -94,8 +94,8 @@ render(){
       <td>{pro.name}</td>
       <td><img style={{width:'80px',height:'80px'}}  class="rounded" src={"http://localhost:8000/"+pro.image}/></td>
       <td>
-       <Link to={"updatepro/"+pro.id} class="btn btn-sm btn-success">Edit</Link>
-        <button style={{margin:5}} class="btn btn-sm btn-danger" onClick={()=>{this.productDelete(pro.id)}}>Delete</button>
+       <Link to={"updatepro/"+pro.id} class=" btn-sm btn btn-gradient-info">Edit</Link>
+        <button style={{margin:5}} class="btn-sm btn btn-gradient-danger" onClick={()=>{this.productDelete(pro.id)}}>Delete</button>
       </td>
      </tr>
      )
