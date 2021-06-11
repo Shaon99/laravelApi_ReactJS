@@ -52,7 +52,7 @@ notify = () =>toast.error("Invalid email or password!! please try again",{
                 <h6 class="font-weight-light">Sign in to continue.</h6>
                 <form class="pt-3" onSubmit={this.formsubmit} id="lform">
                   <div class="form-group">
-                    <input required type="email" class="form-control form-control-lg" id="exampleInputEmail1" onChange={(e)=>{this.setState({email:e.target.value})}} placeholder="Enter address"/>
+                    <input required type="email" class="form-control form-control-lg" id="exampleInputEmail1" onChange={(e)=>{this.setState({email:e.target.value})}} placeholder="Email"/>
                   </div>
                   <div class="form-group">
                     <input required type="password" class="form-control form-control-lg" id="exampleInputPassword1" onChange={(e)=>{this.setState({password:e.target.value})}}  placeholder="Password"/>
@@ -67,7 +67,7 @@ notify = () =>toast.error("Invalid email or password!! please try again",{
                     <button class="btn btn-block btn-gradient-info btn-lg font-weight-medium auth-form-btn">
                       <i class="mdi mdi-facebook mr-2"></i>Connect using facebook </button>
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Don't have an account? <Link to="#" class="text-primary">Create</Link>
+                  <div class="text-center mt-4 font-weight-light"> Don't have an account? <Link to="/Register" class="text-primary">Create</Link>
                   </div>
                 </form>
                   </div>

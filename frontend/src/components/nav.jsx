@@ -12,6 +12,10 @@ import Editb from "./editbrand";
 import Editc from "./editcategory";
 import Addp from "./addproduct";
 import Login from "./login";
+import Register from "./Register";
+import Profile from "./profile";
+
+
 
 
 
@@ -24,14 +28,16 @@ return (
   <bootstarp.Navbar.Collapse id="responsive-navbar-nav">
     <bootstarp.Nav className="mr-auto">
     <bootstarp.Nav.Link  ><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}} to="/home">Home</NavLink></bootstarp.Nav.Link>
+    <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/profile">Profile</NavLink></bootstarp.Nav.Link>
       <bootstarp.Nav.Link ><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}} to="/about">About</NavLink></bootstarp.Nav.Link>
       <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/brand">Brand</NavLink></bootstarp.Nav.Link>
       <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/category">Category</NavLink></bootstarp.Nav.Link>
       <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} activeStyle={{color:'white'}}  to="/product">Product</NavLink></bootstarp.Nav.Link>
-      <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} exact activeStyle={{color:'white'}}  to="/">Login</NavLink></bootstarp.Nav.Link>
-
     </bootstarp.Nav>
   </bootstarp.Navbar.Collapse>
+  <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545' }} exact activeStyle={{color:'white'}}  to="/">Login</NavLink></bootstarp.Nav.Link>
+  <bootstarp.Nav.Link><NavLink style={{ textDecoration: 'none',color:'#dc3545'}} activeStyle={{color:'white'}}  to="/Register" class="-flex flex-row-reverse bd-highlight">Register</NavLink></bootstarp.Nav.Link>
+
 </bootstarp.Navbar>
 
 <Switch>
@@ -64,6 +70,12 @@ return (
 </Route>
 <Route  path="/home">
 <App />
+</Route>
+<Route  path="/Register">
+<Register />
+</Route>
+<Route  path="/profile">
+<Profile />
 </Route>
 <Route  path="/">
 <Login />
